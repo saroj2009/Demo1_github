@@ -1,0 +1,113 @@
+﻿
+@model IEnumerable<DemoProject.Models.EmployeeModel>
+@{
+    ViewBag.Title = "";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+       
+        <h2>Product List</h2>
+        <p>
+            @Html.ActionLink("Create New", "AddEmployee")
+        </p>
+       
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td><img src=@item.Url@item.Image alt="" style="height:40px; width:50px" /></td>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@Html.ActionLink("Delete", "DeleteEmp", new { id = item.Id, filename = item.Image }, new { onclick = "return confirm('Are sure wants to delete?');" })</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="8">
+                        <div class="col-md-offset-2 col-md-10" style="color:green">
+                            @ViewBag.Message
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Product Details</h2>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+
+
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <a class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                            <img src=@item.Url@item.Image alt="Lights" style="height:250px; width:300px">
+                            <div class="caption">
+                                <p><b>Name:</b> @item.Name</p>
+                                <p><b>Description:</b> @item.Description</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Product Details</h4>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td width="50px"></td>
+                                    <td>
+                                        <div style="width:10px"></div> <img src=@item.Url@item.Image alt="Lights" style="height:450px; width:500px">
+                                    </td>
+                                    <td width="50px"></td>
+                                    <td>
+                                        <div class="caption">
+                                            <p><b>Name:</b> @item.Name</p>
+                                            <p><b>Description:</b> @item.Description</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+</body>

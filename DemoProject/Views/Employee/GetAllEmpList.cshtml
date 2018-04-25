@@ -1,0 +1,62 @@
+﻿
+@model IEnumerable<DemoProject.Models.EmployeeDetailsModel>
+@{
+    ViewBag.Title = "";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <h2>Employee List</h2>
+        
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th>Emp ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Grade</th>
+                    <th>Subject</th>
+                    <th>Today Status</th>
+                    <th>Staus Update</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EmpId</td>
+                        <td>@item.Name</td>
+                        <td>@item.Location</td>
+                        <td>@item.Grade</td>
+                        <td>@item.Subject</td>
+                        <td>@item.Status</td>
+                        <td>@Html.ActionLink("YES", "UpdateEmpStatus", new { id = item.EmpId, Location =item.Location,ActionParam='Y'}, new { onclick = "return confirm('Are sure wants to submit?');" }) || @Html.ActionLink("NO", "UpdateEmpStatus", new { id = item.EmpId, Location = item.Location, ActionParam = 'N' }, new { onclick = "return confirm('Are sure wants to submit?');" })</td>
+                        <td>@Html.ActionLink("Status Details", "StatusDetailsById", new { id = item.EmpId, Name = item.Name })</td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="8">
+                        <div class="col-md-offset-2 col-md-10" style="color:green">
+                            @ViewBag.Message
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</body>

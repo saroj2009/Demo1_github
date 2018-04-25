@@ -1,0 +1,57 @@
+﻿
+@model IEnumerable<DemoProject.Models.EmployeeDailyStatusModel>
+@{
+    ViewBag.Title = "";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+
+        <h2>Employee Daily Status Details</h2>
+
+        <table class="table table-bordered">
+            <thead>
+
+                <tr>
+                    <th>Emp Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        <td>@ViewData["Name"]</td>
+                        <td>@item.Date</td>
+                        <td>@item.Status</td>
+                       
+                    </tr>
+                }
+                <tr>
+                    <td colspan="8">
+                        <div class="col-md-offset-2 col-md-10" style="color:green">
+                            @ViewBag.Message
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            @Html.ActionLink("Back to List", "GetAllEmpList")
+        </div>
+    </div>
+
+</body>
